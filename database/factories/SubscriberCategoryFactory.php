@@ -23,7 +23,7 @@ class SubscriberCategoryFactory extends Factory
     public function definition()
     {
         return [
-            'subscriber_id' => Str::uuid(),
+            'category_id' => Str::uuid(),
             'name' => $this->faker->name,
             'reg_amount' => $this->faker->numberBetween(100,1000),
             'promo_amount'=> $this->faker->numberBetween(100,500),

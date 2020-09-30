@@ -14,7 +14,7 @@ class CreateSubscriberCategoriesTable extends Migration
     public function up()
     {
         Schema::create('subscriber_categories', function (Blueprint $table) {
-            $table->uuid('subscriber_id')->primary();
+            $table->uuid('category_id')->primary();
             $table->string('name', 75);
             $table->decimal('reg_amount', 18,2)->default(0.00);
             $table->decimal('promo_amount', 18,2)->default(0.00);

@@ -14,8 +14,8 @@ class CreateSubscribersTable extends Migration
     public function up()
     {
         Schema::create('subscribers', function (Blueprint $table) {
-            $table->uuid('subscriber_id')->primary();
-            $table->string('category_id', 255);
+            $table->uuid('id')->primary();
+            $table->uuid('category_id');
             $table->string('name', 300);
             $table->string('status', 25);
             $table->date('start_date');
@@ -24,7 +24,7 @@ class CreateSubscribersTable extends Migration
             $table->boolean('is_deleted')->default(0);
             $table->string('deleted_by')->nullable();
 
-            $table->foreign('category_id')->references('category_id')->on('subscriber_categories')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('subscriber_categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

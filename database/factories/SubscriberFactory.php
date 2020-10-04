@@ -24,9 +24,8 @@ class SubscriberFactory extends Factory
     public function definition()
     {
         return [
-            'subscriber_id' => Str::uuid(),
-            'category_id' => function() {
-                return SubscriberCategory::all()->random()->pluck('category_id');
+            'category_id' => function () {
+                return SubscriberCategory::all()->random();
             },
             'name' => $this->faker->sentence,
             'status' => $this->faker->word,

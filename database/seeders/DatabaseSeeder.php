@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Country;
 use App\Models\User;
 use App\Models\SmsSetting;
+use App\Models\State;
 use App\Models\Subscriber;
 use App\Models\SystemSetting;
 use App\Models\SubscriberStaff;
@@ -13,6 +15,7 @@ use App\Models\SubscriberAccount;
 use App\Models\SubscriberCategory;
 use App\Models\SubscriberTransaction;
 use App\Models\SubscriberStaffDocument;
+use App\Models\SubscriptionPayment;
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,5 +36,8 @@ class DatabaseSeeder extends Seeder
         SubscriberStaffDocument::factory(10)->create();
         SystemSetting::factory(10)->create();
         SmsSetting::factory(10)->create();
+        State::factory(10)->create();
+        Country::factory(10)->create();
+        SubscriptionPayment::factory(10)->create();
     }
 }

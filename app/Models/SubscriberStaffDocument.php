@@ -6,19 +6,17 @@ use App\Http\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SubscriberStaff extends Model
+class SubscriberStaffDocument extends Model
 {
     use HasFactory, UsesUuid;
-
-    protected $guarded = [];
 
     public function subscriber()
     {
         return $this->belongsTo(Subscriber::class);
     }
 
-    public function subscriberStaffDocument()
+    public function staff()
     {
-        return $this->hasOne(SubscriberStaffDocument::class, 'staff_id');
+        return $this->belongsTo(SubscriberStaff::class);
     }
 }

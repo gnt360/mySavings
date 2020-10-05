@@ -3,18 +3,18 @@
 namespace Database\Factories;
 
 use App\Models\Subscriber;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\SubscriberAccount;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-class UserFactory extends Factory
+class SubscriberAccountFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = SubscriberAccount::class;
 
     /**
      * Define the model's default state.
@@ -27,11 +27,10 @@ class UserFactory extends Factory
             'subscriber_id' => function () {
                 return Subscriber::all()->random();
             },
-            'name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'account_type' => $this->faker->bankAccountNumber,
+            'account_name' => $this->faker->name,
+            'created_by' => Str::uuid(),
+            'modified_by' => Str::uuid()
         ];
     }
 }

@@ -16,4 +16,44 @@ class Subscriber extends Model
     {
         return $this->belongsTo(SubscriberCategory::class);
     }
+
+    public function subscriberDetails()
+    {
+        return $this->hasOne(SubscriberDetail::class, 'subscriber_id');
+    }
+
+    public function subscriberAccounts()
+    {
+        return $this->hasMany(SubscriberAccount::class, 'subscriber_id');
+    }
+
+    public function subscriberTransactions()
+    {
+        return $this->hasMany(SubscriberTransaction::class, 'subscriber_id');
+    }
+
+    public function subsriberStaffs()
+    {
+        return $this->hasMany(SubscriberStaff::class, 'subscriber_id');
+    }
+
+    public function systemSetting()
+    {
+        return $this->hasOne(SystemSetting::class, 'subscriber_id');
+    }
+
+    public function smsSettings()
+    {
+        return $this->hasMany(SmsSetting::class, 'subscriber_id');
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'subscriber_id');
+    }
+
+    public function subscriptionPayments()
+    {
+        return $this->hasMany(SubscriptionPayment::class);
+    }
 }

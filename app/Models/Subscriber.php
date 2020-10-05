@@ -6,14 +6,14 @@ use App\Http\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class SubscriberCategory extends Model
+class Subscriber extends Model
 {
     use HasFactory, UsesUuid;
 
     protected $guarded = [];
 
-    public function subscribers()
+    public function subscriberCategory()
     {
-        return $this->hasMany(Subscriber::class, 'category_id');
+        return $this->belongsTo(SubscriberCategory::class);
     }
 }

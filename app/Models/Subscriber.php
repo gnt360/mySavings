@@ -16,4 +16,9 @@ class Subscriber extends Model
     {
         return $this->belongsTo(SubscriberCategory::class);
     }
+
+    public function subscriberDetails()
+    {
+        return $this->hasOne(SubscriberDetail::class, 'subscriber_id');
+    }
 }

@@ -31,4 +31,9 @@ class Subscriber extends Model
     {
         return $this->hasMany(SubscriberTransaction::class, 'subscriber_id');
     }
+
+    public function subsriberStaffs()
+    {
+        return $this->hasMany(SubscriberStaff::class, 'subscriber_id');
+    }
 }

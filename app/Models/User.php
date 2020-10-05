@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Traits\UsesUuid;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -17,6 +18,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use UsesUuid;
 
     /**
      * The attributes that are mass assignable.
@@ -26,8 +28,18 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'subscriber_id',
+        'status',
+        'image_url',
+        'is_deleted',
+        'deleted_by',
         'password',
     ];
+
+    public function subscriber()
+    {
+        return $this->belongsTo(Subscriber::class);
+    }
 
     /**
      * The attributes that should be hidden for arrays.

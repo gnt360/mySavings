@@ -2,16 +2,17 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\SmsSetting;
 use App\Models\Subscriber;
+use App\Models\SystemSetting;
+use App\Models\SubscriberStaff;
+use Illuminate\Database\Seeder;
+use App\Models\SubscriberDetail;
 use App\Models\SubscriberAccount;
 use App\Models\SubscriberCategory;
-use App\Models\SubscriberDetail;
-use App\Models\SubscriberStaff;
-use App\Models\SubscriberStaffDocument;
 use App\Models\SubscriberTransaction;
-use App\Models\SystemSetting;
-use Illuminate\Database\Seeder;
+use App\Models\SubscriberStaffDocument;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,9 +23,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
         SubscriberCategory::factory(10)->create();
         Subscriber::factory(10)->create();
+        User::factory(10)->create();
         SubscriberDetail::factory(10)->create();
         SubscriberAccount::factory(10)->create();
         SubscriberTransaction::factory(10)->create();

@@ -41,4 +41,14 @@ class Subscriber extends Model
     {
         return $this->hasOne(SystemSetting::class, 'subscriber_id');
     }
+
+    public function smsSettings()
+    {
+        return $this->hasMany(SmsSetting::class, 'subscriber_id');
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'subscriber_id');
+    }
 }

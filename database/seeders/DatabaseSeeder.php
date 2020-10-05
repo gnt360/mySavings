@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Subscriber;
+use App\Models\SubscriberAccount;
 use App\Models\SubscriberCategory;
 use App\Models\SubscriberDetail;
 use Illuminate\Database\Seeder;
@@ -20,5 +21,6 @@ class DatabaseSeeder extends Seeder
         SubscriberCategory::factory(10)->create();
         Subscriber::factory(10)->create();
         SubscriberDetail::factory(10)->create();
+        SubscriberAccount::factory(10)->create();
     }
 }

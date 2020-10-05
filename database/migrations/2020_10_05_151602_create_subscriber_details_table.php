@@ -29,6 +29,8 @@ class CreateSubscriberDetailsTable extends Migration
             $table->string('twitter')->nullable();
             $table->uuid('created_by');
             $table->uuid('modified_by');
+
+            $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('cascade');
             $table->timestamps();
         });
     }

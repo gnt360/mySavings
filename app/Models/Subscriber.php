@@ -21,4 +21,9 @@ class Subscriber extends Model
     {
         return $this->hasOne(SubscriberDetail::class, 'subscriber_id');
     }
+
+    public function subscriberAccounts()
+    {
+        return $this->hasMany(SubscriberAccount::class, 'subscriber_id');
+    }
 }

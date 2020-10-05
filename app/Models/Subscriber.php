@@ -36,4 +36,9 @@ class Subscriber extends Model
     {
         return $this->hasMany(SubscriberStaff::class, 'subscriber_id');
     }
+
+    public function systemSetting()
+    {
+        return $this->hasOne(SystemSetting::class, 'subscriber_id');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\SmsSetting;
 use App\Models\Subscriber;
 use App\Models\SubscriberAccount;
 use App\Models\SubscriberCategory;
@@ -9,6 +10,7 @@ use App\Models\SubscriberDetail;
 use App\Models\SubscriberStaff;
 use App\Models\SubscriberStaffDocument;
 use App\Models\SubscriberTransaction;
+use App\Models\SystemSetting;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -28,5 +30,7 @@ class DatabaseSeeder extends Seeder
         SubscriberTransaction::factory(10)->create();
         SubscriberStaff::factory(10)->create();
         SubscriberStaffDocument::factory(10)->create();
+        SystemSetting::factory(10)->create();
+        SmsSetting::factory(10)->create();
     }
 }

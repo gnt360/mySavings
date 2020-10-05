@@ -6,19 +6,14 @@ use App\Http\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SubscriberDetail extends Model
+class SmsSetting extends Model
 {
     use HasFactory, UsesUuid;
 
     protected $guarded = [];
 
-    public function subscriber()
+    public function subscribers()
     {
         return $this->belongsTo(Subscriber::class);
-    }
-
-    public function systemSetting()
-    {
-        return $this->belongsTo(SystemSetting::class, 'detail_id');
     }
 }

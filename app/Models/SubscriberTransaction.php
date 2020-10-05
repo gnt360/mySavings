@@ -6,7 +6,7 @@ use App\Http\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SubscriberAccount extends Model
+class SubscriberTransaction extends Model
 {
     use HasFactory, UsesUuid;
 
@@ -17,8 +17,8 @@ class SubscriberAccount extends Model
         return $this->belongsTo(Subscriber::class);
     }
 
-    public function subscriberTransactions()
+    public function subscriberAccount()
     {
-        return $this->hasMany(SubscriberTransaction::class, 'account_id');
+        return $this->belongsTo(SubscriberAccount::class);
     }
 }

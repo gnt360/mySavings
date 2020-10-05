@@ -26,4 +26,9 @@ class Subscriber extends Model
     {
         return $this->hasMany(SubscriberAccount::class, 'subscriber_id');
     }
+
+    public function subscriberTransactions()
+    {
+        return $this->hasMany(SubscriberTransaction::class, 'subscriber_id');
+    }
 }

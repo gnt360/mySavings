@@ -6,6 +6,7 @@ use App\Models\Subscriber;
 use App\Models\SubscriberAccount;
 use App\Models\SubscriberCategory;
 use App\Models\SubscriberDetail;
+use App\Models\SubscriberTransaction;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,5 +23,6 @@ class DatabaseSeeder extends Seeder
         Subscriber::factory(10)->create();
         SubscriberDetail::factory(10)->create();
         SubscriberAccount::factory(10)->create();
+        SubscriberTransaction::factory(10)->create();
     }
 }

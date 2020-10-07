@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubscriberTransactionsTable extends Migration
+class CreateLoansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,29 @@ class CreateSubscriberTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscriber_transactions', function (Blueprint $table) {
+        Schema::create('loans', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('subscriber_id');
-            $table->uuid('account_id');
-            $table->decimal('deposit', 18, 2)->default(0.00);
-            $table->decimal('withdrawal', 18, 2)->default(0.00);
-            $table->decimal('account_balance', 18, 2)->default(0.00);
-            $table->text('description');
+            $table->uuid('category_id');
+            $table->uuid('customer_id');
+            $table->decimal('loan_amount', 18, 2)->default(0.00);
+            $table->decimal('paid_amount', 18, 2)->default(0.00);
+            $table->decimal('balance', 18, 2)->default(0.00);
+            $table->decimal('repayment_amount', 18, 2)->default(0.00);
+            $table->date('date_release');
+            $table->date('date_due');
+            $table->uuid('agent')->nullable();
+            $table->text('description')->nullable();
+            $table->text('remark')->nullable();
+            $table->string('status', 25)->default('Unpaid');
             $table->boolean('is_deleted')->default(0);
             $table->uuid('deleted_by')->nullable();
             $table->uuid('created_by')->nullable();
             $table->uuid('modified_by')->nullable();
 
             $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('restrict');
-            $table->foreign('account_id')->references('id')->on('subscriber_accounts')->onDelete('restrict');
+            $table->foreign('category_id')->references('id')->on('loan_categories')->onDelete('restrict');
+            $table->foreign('customer_id')->references('id')->on('customer_accounts')->onDelete('restrict');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('restrict');         
             $table->foreign('modified_by')->references('id')->on('users')->onDelete('restrict');
           
@@ -42,6 +50,6 @@ class CreateSubscriberTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscriber_transactions');
+        Schema::dropIfExists('loans');
     }
 }

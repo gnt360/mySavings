@@ -27,10 +27,10 @@ class CreateSubscriberStaffTable extends Migration
             $table->string('state_code')->nullable();
             $table->string('country_code')->nullable();
             $table->string('zip')->nullable();
-            $table->uuid('created_by');
-            $table->uuid('modified_by');
+            $table->uuid('created_by')->nullable();
+            $table->uuid('modified_by')->nullable();
 
-            $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('cascade');
+            $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('restrict');
             $table->timestamps();
         });
     }

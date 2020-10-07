@@ -20,8 +20,8 @@ class CreateSubscriberStaffDocumentsTable extends Migration
             $table->string('file_name');
             $table->string('file_url');
 
-            $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('cascade');
-            $table->foreign('staff_id')->references('id')->on('subscriber_staff')->onDelete('cascade');
+            $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('restrict');
+            $table->foreign('staff_id')->references('id')->on('subscriber_staff')->onDelete('restrict');
             $table->timestamps();
         });
     }

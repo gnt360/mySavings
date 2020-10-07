@@ -27,10 +27,10 @@ class CreateSubscriberDetailsTable extends Migration
             $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();
             $table->string('twitter')->nullable();
-            $table->uuid('created_by');
-            $table->uuid('modified_by');
+            $table->uuid('created_by')->nullable();
+            $table->uuid('modified_by')->nullable();
 
-            $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('cascade');
+            $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('restrict');
             $table->timestamps();
         });
     }

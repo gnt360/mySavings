@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Subscriber;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\SubscriberDetail;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -30,6 +31,12 @@ class SubscriberDetailFactory extends Factory
             'subscriber_id' => function () {
                 return Subscriber::all()->random();
             },
+            'created_by' => function () {
+                return User::all()->random();
+            },
+            'modified_by' => function () {
+                return User::all()->random();
+            },
             'address1' => $this->faker->address,
             'address2' => $this->faker->address,
             'postal_code' => $this->faker->numberBetween(4, 5),
@@ -40,8 +47,6 @@ class SubscriberDetailFactory extends Factory
             'facebook' => $facebookUrl,
             'instagram' => $intagramUrl,
             'twitter' => $twitterUrl,
-            'created_by' => Str::uuid(),
-            'modified_by' => Str::uuid()
         ];
     }
 }

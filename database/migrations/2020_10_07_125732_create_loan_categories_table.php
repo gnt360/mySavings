@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSystemSettingsTable extends Migration
+class CreateLoanCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,16 @@ class CreateSystemSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('system_settings', function (Blueprint $table) {
+        Schema::create('loan_categories', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('subscriber_id');
-            $table->string('display_name');
-            $table->text('footer');
-            $table->string('website_url');
-            $table->string('logo')->nullable();
-            $table->string('contact_number');
-            $table->string('contact_email');
-            $table->text('map');
-            $table->boolean('sms_active')->default(1);
-            $table->decimal('sms_charges', 3, 2)->default();
-
+            $table->string('name', 250);
+            $table->decimal('interest_rate', 5, 2)->default(0.00);
+            $table->string('repayment_plan', 25)->default('Weekly');
+            $table->text('description');
 
             $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('restrict');
+         
             $table->timestamps();
         });
     }
@@ -39,6 +34,6 @@ class CreateSystemSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('system_settings');
+        Schema::dropIfExists('loan_categories');
     }
 }

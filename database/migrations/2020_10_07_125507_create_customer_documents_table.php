@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSystemSettingsTable extends Migration
+class CreateCustomerDocumentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,16 @@ class CreateSystemSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('system_settings', function (Blueprint $table) {
+      
+        Schema::create('customer_documents', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('subscriber_id');
-            $table->string('display_name');
-            $table->text('footer');
-            $table->string('website_url');
-            $table->string('logo')->nullable();
-            $table->string('contact_number');
-            $table->string('contact_email');
-            $table->text('map');
-            $table->boolean('sms_active')->default(1);
-            $table->decimal('sms_charges', 3, 2)->default();
-
+            $table->uuid('customer_id');
+            $table->string('file_name');
+            $table->string('file_url');
 
             $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('restrict');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('restrict');
             $table->timestamps();
         });
     }
@@ -39,6 +34,6 @@ class CreateSystemSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('system_settings');
+        Schema::dropIfExists('customer_documents');
     }
 }

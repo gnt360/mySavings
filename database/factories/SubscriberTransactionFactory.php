@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Subscriber;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\SubscriberAccount;
 use App\Models\SubscriberTransaction;
@@ -31,13 +32,19 @@ class SubscriberTransactionFactory extends Factory
             'account_id' => function () {
                 return SubscriberAccount::all()->random();
             },
-
+            'created_by' => function () {
+                return User::all()->random();
+            },
+            'deleted_by' => function () {
+                return User::all()->random();
+            },
+            'modified_by' => function () {
+                return User::all()->random();
+            },
             'deposit' => $this->faker->numberBetween(100, 1000),
             'withdrawal' => $this->faker->numberBetween(100, 1000),
             'account_balance' => $this->faker->numberBetween(100, 2000),
-            'description' => $this->faker->text,
-            'created_by' => Str::uuid(),
-            'modified_by' => Str::uuid()
+            'description' => $this->faker->text
         ];
     }
 }

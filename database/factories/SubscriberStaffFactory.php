@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Subscriber;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\SubscriberStaff;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -27,6 +28,12 @@ class SubscriberStaffFactory extends Factory
             'subscriber_id' => function () {
                 return Subscriber::all()->random();
             },
+            'created_by' => function () {
+                return User::all()->random();
+            },
+            'modified_by' => function () {
+                return User::all()->random();
+            },
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
             'email' => $this->faker->unique()->safeEmail,
@@ -35,9 +42,7 @@ class SubscriberStaffFactory extends Factory
             'address2' => $this->faker->address,
             'city' => $this->faker->city,
             'state_code' => $this->faker->numberBetween(10, 20),
-            'country_code' => $this->faker->countryCode,
-            'created_by' => Str::uuid(),
-            'modified_by' => Str::uuid()
+            'country_code' => $this->faker->countryCode
         ];
     }
 }

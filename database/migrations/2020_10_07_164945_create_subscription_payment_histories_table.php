@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubscriberAccountsTable extends Migration
+class CreateSubscriptionPaymentHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateSubscriberAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscriber_accounts', function (Blueprint $table) {
+        Schema::create('subscription_payment_histories', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('subscriber_id');
-            $table->boolean('status')->default(1);
-            $table->string('account_type');
-            $table->string('account_name');
-            $table->decimal('current_balance', 18, 2)->default(0.00);
-            $table->decimal('credit_balance', 18, 2)->default(0.00);
-            $table->decimal('debit_balance', 18, 2)->default(0.00);
+            $table->decimal('amount_paid', 18, 2);
+            $table->date('date_paid');
+            $table->string('status', 75);
+            $table->text('description')->nullable();
             $table->boolean('is_deleted')->default(0);
             $table->uuid('deleted_by')->nullable();
             $table->uuid('created_by')->nullable();
@@ -29,7 +27,7 @@ class CreateSubscriberAccountsTable extends Migration
 
             $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('restrict');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('restrict');         
-            $table->foreign('modified_by')->references('id')->on('users')->onDelete('restrict');          
+            $table->foreign('modified_by')->references('id')->on('users')->onDelete('restrict');
             $table->timestamps();
         });
     }
@@ -41,6 +39,6 @@ class CreateSubscriberAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscriber_accounts');
+        Schema::dropIfExists('subscription_payment_histories');
     }
 }

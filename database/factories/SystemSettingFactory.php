@@ -27,10 +27,7 @@ class SystemSettingFactory extends Factory
         return [
             'subscriber_id' => function () {
                 return Subscriber::all()->random();
-            },
-            'detail_id' => function () {
-                return SubscriberDetail::all()->random();
-            },
+            },           
 
             'display_name' => $this->faker->sentence,
             'footer' => $this->faker->text,

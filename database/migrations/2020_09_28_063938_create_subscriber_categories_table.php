@@ -17,7 +17,7 @@ class CreateSubscriberCategoriesTable extends Migration
             $table->uuid('id')->primary();
             $table->string('name', 75);
             $table->decimal('reg_amount', 18, 2)->default(0.00);
-            $table->decimal('promo_amount', 18, 2)->default(0.00);
+            $table->decimal('discount', 5, 2)->default(0.00);
             $table->timestamps();
         });
     }

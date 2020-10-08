@@ -19,8 +19,13 @@ class CreateSubscriptionPaymentsTable extends Migration
             $table->decimal('amount', 18, 2);
             $table->string('payment_status');
             $table->boolean('is_deleted')->default(0);
+            $table->uuid('deleted_by')->nullable();
+            $table->uuid('created_by')->nullable();
+            $table->uuid('modified_by')->nullable();
 
-            $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('cascade');
+            $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('restrict');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('restrict');         
+            $table->foreign('modified_by')->references('id')->on('users')->onDelete('restrict');
             $table->timestamps();
         });
     }

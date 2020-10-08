@@ -56,4 +56,48 @@ class Subscriber extends Model
     {
         return $this->hasMany(SubscriptionPayment::class);
     }
+    public function customers()
+    {
+        return $this->hasMany(Customer::class, 'subscriber_id');
+    }
+    public function customer_documents()
+    {
+        return $this->hasMany(CustomerDocument::class, 'subscriber_id');
+    }
+    public function customer_account_types()
+    {
+        return $this->hasMany(CustomerAccountType::class, 'subscriber_id');
+    }
+    public function customer_accounts()
+    {
+        return $this->hasMany(CustomerAccount::class, 'subscriber_id');
+    }
+    public function customer_transactions()
+    {
+        return $this->hasMany(CustomerTransaction::class, 'subscriber_id');
+    }
+    public function loan_categories()
+    {
+        return $this->hasMany(LoanCategory::class, 'subscriber_id');
+    }
+    public function loans()
+    {
+        return $this->hasMany(Loan::class, 'subscriber_id');
+    }
+    public function Loan_guarantors()
+    {
+        return $this->hasMany(LoanGuarantor::class, 'subscriber_id');
+    }
+    public function Loan_collateral()
+    {
+        return $this->hasMany(LoanCollateral::class, 'subscriber_id');
+    }
+    public function Loan_repayment()
+    {
+        return $this->hasMany(LoanRepayment::class, 'subscriber_id');
+    }
+    public function Subscription_paymentHistories()
+    {
+        return $this->hasMany(SubscriptionPaymentHistory::class, 'subscriber_id');
+    }
 }

@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\SubscriberCategory;
+use App\Models\CustomerAccountType;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class SubscriberCategoryFactory extends Factory
+class CustomerAccountTypeFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = SubscriberCategory::class;
+    protected $model = CustomerAccountType::class;
 
     /**
      * Define the model's default state.
@@ -23,9 +22,7 @@ class SubscriberCategoryFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
-            'reg_amount' => $this->faker->numberBetween(100, 1000),
-            'discount' => $this->faker->numberBetween(100, 500),
+            //
         ];
     }
 }

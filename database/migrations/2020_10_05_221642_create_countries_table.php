@@ -19,7 +19,7 @@ class CreateCountriesTable extends Migration
             $table->string('country_code');
             $table->string('name');
 
-            $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
+            $table->foreign('state_id')->references('id')->on('states')->onDelete('restrict');
             $table->timestamps();
         });
     }

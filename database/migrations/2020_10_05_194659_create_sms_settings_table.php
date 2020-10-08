@@ -17,12 +17,12 @@ class CreateSmsSettingsTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('subscriber_id');
             $table->text('sms_gateway');
-            $table->text('username');
-            $table->text('password');
+            $table->text('username')->nullable();
+            $table->text('password')->nullable();
             $table->text('api');
             $table->boolean('status')->default(0);
 
-            $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('cascade');
+            $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('restrict');
             $table->timestamps();
         });
     }

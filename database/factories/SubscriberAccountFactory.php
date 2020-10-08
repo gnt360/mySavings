@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Subscriber;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\SubscriberAccount;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -27,10 +28,18 @@ class SubscriberAccountFactory extends Factory
             'subscriber_id' => function () {
                 return Subscriber::all()->random();
             },
+            'created_by' => function () {
+                return User::all()->random();
+            },
+            'deleted_by' => function () {
+                return User::all()->random();
+            },
+            'modified_by' => function () {
+                return User::all()->random();
+            },            
             'account_type' => $this->faker->bankAccountNumber,
-            'account_name' => $this->faker->name,
-            'created_by' => Str::uuid(),
-            'modified_by' => Str::uuid()
+            'account_name' => $this->faker->name
+            
         ];
     }
 }

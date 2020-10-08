@@ -16,8 +16,8 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('subscriber_id');
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('user_name')->unique();
+            $table->string('email');
             $table->boolean('status')->default(1);
             $table->string('image_url')->nullable();
             $table->boolean('is_deleted')->default(0);
@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
 
 
-            // $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('cascade');
+            $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('restrict');
             $table->timestamps();
         });
     }

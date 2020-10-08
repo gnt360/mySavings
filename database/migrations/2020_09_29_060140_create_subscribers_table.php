@@ -24,7 +24,7 @@ class CreateSubscribersTable extends Migration
             $table->boolean('is_deleted')->default(0);
             $table->string('deleted_by')->nullable();
 
-            $table->foreign('category_id')->references('id')->on('subscriber_categories')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('subscriber_categories')->onDelete('restrict');
             $table->timestamps();
         });
     }

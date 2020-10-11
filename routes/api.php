@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\CreateAccountController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,5 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(static function(){
     Route::prefix('users')->name('auth.')->group(static function(){
+        Route::post('/createAccount', [CreateAccountController::class, 'createAccount'])->name('createAccount');
 });
 });

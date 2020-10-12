@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\CreateAccountController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,6 @@ Route::prefix('v1')->group(static function(){
     Route::post('/createAccount', [CreateAccountController::class, 'createAccount'])->name('createAccount');
     Route::post('/login', [LoginController::class, 'login'])->name('login');
     Route::post('/forgotPassword', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forgotPassword');
-
+    Route::post('/resetPassword', [ResetPasswordController::class, 'reset'])->name('resetPassword');
 });
 });

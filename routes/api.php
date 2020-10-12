@@ -40,6 +40,7 @@ Route::prefix('v1')->group(static function(){
     Route::middleware('auth:sanctum')->group(static function () {
         Route::prefix('user')->name('user.')->group(static function () {
             Route::get('/profile', [UserProfileController::class, 'show'])->name('show');
+            Route::post('/profilePicture', [UserProfileController::class, 'profilePicture'])->name('profilePicture');
             Route::post('/logOut', [UserProfileController::class, 'logOut'])->name('logOut');
         });
     });

@@ -31,7 +31,12 @@ class CreateAccountController extends BaseController
             return $this->errorResponse('Unable to create account, please try again', Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        return $this->successResponse('Account successfully created, please verify your account', new SubscriberAccountResource($user), Response::HTTP_CREATED);
+
+
+        //send user notification after register
+        $user->sendEmailVerificationNotification();
+
+        return $this->successResponse('Account successfully created, please check your email to verify your account', new SubscriberAccountResource($user), Response::HTTP_CREATED);
 
     }
 }

@@ -10,7 +10,7 @@ class UserProfileController extends BaseController
 {
     public function show()
     {
-        $user = auth()->user()->subscriber;
+        $user = auth()->user();
         if(!$user){
             return $this->errorResponse('Unable to retrieve profile.', Response::HTTP_BAD_REQUEST);
         }

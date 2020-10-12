@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\CreateAccountController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\User\ChangePasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,7 @@ Route::prefix('v1')->group(static function(){
         Route::prefix('user')->name('user.')->group(static function () {
             Route::get('/profile', [UserProfileController::class, 'show'])->name('show');
             Route::post('/profilePicture', [UserProfileController::class, 'profilePicture'])->name('profilePicture');
+            Route::patch('/changePassword', [ChangePasswordController::class, 'changePassword'])->name('changePassword');
             Route::post('/logOut', [UserProfileController::class, 'logOut'])->name('logOut');
         });
     });

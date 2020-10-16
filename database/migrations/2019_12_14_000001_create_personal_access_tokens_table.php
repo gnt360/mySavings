@@ -15,7 +15,7 @@ class CreatePersonalAccessTokensTable extends Migration
     {
         Schema::create('personal_access_tokens', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->morphs('tokenable');
+            $table->string('tokenable', 64);
             $table->string('name');
             $table->string('token', 64)->unique();
             $table->text('abilities')->nullable();

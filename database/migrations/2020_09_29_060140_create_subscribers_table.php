@@ -18,8 +18,8 @@ class CreateSubscribersTable extends Migration
             $table->uuid('category_id');
             $table->string('name', 300);
             $table->string('status', 25);
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->boolean('active_status')->default(0);
             $table->boolean('is_deleted')->default(0);
             $table->string('deleted_by')->nullable();

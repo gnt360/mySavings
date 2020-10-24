@@ -18,7 +18,7 @@ class SubscriberCategoryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'reg_amount' => $this->reg_amount,
-            'discount' => $this->amount,
+            'discount' => $this->discount,
             'created_at' => $this->created_at,
         ];
     }

@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\SubscriberCategory\AllSubscriberCategoryController;
 use App\Http\Controllers\SubscriberCategory\CreateSubscriberCategoryController;
+use App\Http\Controllers\SubscriberCategory\GetSubscriberCategoryController;
 use App\Http\Controllers\User\ChangePasswordController;
 
 /*
@@ -47,9 +48,12 @@ Route::prefix('v1')->group(static function(){
             Route::patch('/changePassword', [ChangePasswordController::class, 'changePassword'])->name('changePassword');
             Route::post('/logOut', [UserProfileController::class, 'logOut'])->name('logOut');
         });
+
         Route::prefix('subscriberCategories')->name('category.')->group(static function(){
-            Route::get('/all-subscriber-categories',[AllSubscriberCategoryController::class, 'index'])->name('index');
-            Route::post('/create-subscriber-category',[CreateSubscriberCategoryController::class, 'store'])->name('store');
+            Route::get('/',[AllSubscriberCategoryController::class, 'index'])->name('index');
+            Route::post('/',[CreateSubscriberCategoryController::class, 'store'])->name('store');
+            Route::get('/{category}',[GetSubscriberCategoryController::class, 'show'])->name('show');
+
         });
     });
 

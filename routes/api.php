@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\CreateAccountController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\SubscriberCategory\CreateSubscriberCategoryController;
 use App\Http\Controllers\User\ChangePasswordController;
 
 /*
@@ -44,6 +45,9 @@ Route::prefix('v1')->group(static function(){
             Route::post('/profilePicture', [UserProfileController::class, 'profilePicture'])->name('profilePicture');
             Route::patch('/changePassword', [ChangePasswordController::class, 'changePassword'])->name('changePassword');
             Route::post('/logOut', [UserProfileController::class, 'logOut'])->name('logOut');
+        });
+        Route::prefix('subscriberCategories')->name('category.')->group(static function(){
+            Route::post('/create-subscriber-category',[CreateSubscriberCategoryController::class, 'store'])->name('store');
         });
     });
 

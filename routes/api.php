@@ -12,6 +12,7 @@ use App\Http\Controllers\User\ChangePasswordController;
 use App\Http\Controllers\SubscriberCategory\AllSubscriberCategoryController;
 use App\Http\Controllers\SubscriberCategory\GetSubscriberCategoryController;
 use App\Http\Controllers\SubscriberCategory\CreateSubscriberCategoryController;
+use App\Http\Controllers\SubscriberCategory\DeleteSubscriberCategoryController;
 use App\Http\Controllers\SubscriberCategory\UpdateSubscriberCategoryController;
 
 /*
@@ -55,7 +56,7 @@ Route::prefix('v1')->group(static function(){
             Route::post('/',[CreateSubscriberCategoryController::class, 'store'])->name('store');
             Route::get('/{category}',[GetSubscriberCategoryController::class, 'show'])->name('show');
             Route::patch('/{category}',[UpdateSubscriberCategoryController::class, 'update'])->name('update');
-
+            Route::delete('/{category}',[DeleteSubscriberCategoryController::class, 'destroy'])->name('destroy');
         });
     });
 

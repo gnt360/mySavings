@@ -8,10 +8,11 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\CreateAccountController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\SubscriberCategory\AllSubscriberCategoryController;
-use App\Http\Controllers\SubscriberCategory\CreateSubscriberCategoryController;
-use App\Http\Controllers\SubscriberCategory\GetSubscriberCategoryController;
 use App\Http\Controllers\User\ChangePasswordController;
+use App\Http\Controllers\SubscriberCategory\AllSubscriberCategoryController;
+use App\Http\Controllers\SubscriberCategory\GetSubscriberCategoryController;
+use App\Http\Controllers\SubscriberCategory\CreateSubscriberCategoryController;
+use App\Http\Controllers\SubscriberCategory\UpdateSubscriberCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,7 @@ Route::prefix('v1')->group(static function(){
             Route::get('/',[AllSubscriberCategoryController::class, 'index'])->name('index');
             Route::post('/',[CreateSubscriberCategoryController::class, 'store'])->name('store');
             Route::get('/{category}',[GetSubscriberCategoryController::class, 'show'])->name('show');
+            Route::patch('/{category}',[UpdateSubscriberCategoryController::class, 'update'])->name('update');
 
         });
     });

@@ -9,11 +9,7 @@ use App\Http\Controllers\Auth\CreateAccountController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\User\ChangePasswordController;
-use App\Http\Controllers\SubscriberCategory\AllSubscriberCategoryController;
-use App\Http\Controllers\SubscriberCategory\GetSubscriberCategoryController;
-use App\Http\Controllers\SubscriberCategory\CreateSubscriberCategoryController;
-use App\Http\Controllers\SubscriberCategory\DeleteSubscriberCategoryController;
-use App\Http\Controllers\SubscriberCategory\UpdateSubscriberCategoryController;
+use App\Http\Controllers\Subscribers\SubscriberCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,11 +48,11 @@ Route::prefix('v1')->group(static function(){
         });
 
         Route::prefix('subscriberCategories')->name('category.')->group(static function(){
-            Route::get('/',[AllSubscriberCategoryController::class, 'index'])->name('index');
-            Route::post('/',[CreateSubscriberCategoryController::class, 'store'])->name('store');
-            Route::get('/{category}',[GetSubscriberCategoryController::class, 'show'])->name('show');
-            Route::patch('/{category}',[UpdateSubscriberCategoryController::class, 'update'])->name('update');
-            Route::delete('/{category}',[DeleteSubscriberCategoryController::class, 'destroy'])->name('destroy');
+            Route::get('/',[SubscriberCategoryController::class, 'index'])->name('index');
+            Route::post('/',[SubscriberCategoryController::class, 'store'])->name('store');
+            Route::get('/{category}',[SubscriberCategoryController::class, 'show'])->name('show');
+            Route::patch('/{category}',[SubscriberCategoryController::class, 'update'])->name('update');
+            Route::delete('/{category}',[SubscriberCategoryController::class, 'destroy'])->name('destroy');
         });
     });
 

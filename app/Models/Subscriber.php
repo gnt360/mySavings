@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Http\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use DateTimeInterface;
 
 class Subscriber extends Model
 {
@@ -12,9 +13,14 @@ class Subscriber extends Model
 
     protected $guarded = [];
 
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
+
     public function subscriberCategory()
     {
-        return $this->belongsTo(SubscriberCategory::class);
+        return $this->belongsTo(SubscriberCategory::class, 'category_id');
     }
 
     public function subscriberDetails()

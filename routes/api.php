@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\User\ChangePasswordController;
 use App\Http\Controllers\Subscribers\SubscriberCategoryController;
+use App\Http\Controllers\Subscribers\SubscriberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,13 @@ Route::prefix('v1')->group(static function(){
             Route::get('/{category}',[SubscriberCategoryController::class, 'show'])->name('show');
             Route::patch('/{category}',[SubscriberCategoryController::class, 'update'])->name('update');
             Route::delete('/{category}',[SubscriberCategoryController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('subscribers')->name('subscriber.')->group(static function(){
+            Route::get('/', [SubscriberController::class, 'index'])->name('index');
+            Route::get('/{subscriber}', [SubscriberController::class, 'show'])->name('show');
+            Route::post('/', [SubscriberController::class, 'subscriberSubscription'])->name('subscriberSubscription');
+            Route::post('/update-details', [SubscriberController::class, 'updateDetails'])->name('updateDetails');
         });
     });
 

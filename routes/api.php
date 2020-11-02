@@ -87,7 +87,6 @@ Route::prefix('v1')->group(static function(){
             Route::get('/{setting}', [SettingController::class, 'show'])->name('show');
             Route::patch('/{setting}', [SettingController::class, 'update'])->name('update');
             Route::delete('/{setting}', [SettingController::class, 'destroy'])->name('destroy');
-
         });
 
         /*

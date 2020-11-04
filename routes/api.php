@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\CreateAccountController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Settings\SettingController;
+use App\Http\Controllers\Subscribers\StaffController;
 use App\Http\Controllers\User\ChangePasswordController;
 use App\Http\Controllers\Subscribers\SubscriberCategoryController;
 use App\Http\Controllers\Subscribers\SubscriberController;
@@ -88,9 +89,23 @@ Route::prefix('v1')->group(static function(){
             Route::patch('/{setting}', [SettingController::class, 'update'])->name('update');
             Route::delete('/{setting}', [SettingController::class, 'destroy'])->name('destroy');
         });
-
         /*
         ************ System Settings Ends Here *******************
+        */
+
+        /*
+        ************ Staff Routes starts here ******************
+        */
+         Route::prefix('staff')->name('staff.')->group(static function(){
+            Route::get('/', [StaffController::class, 'index'])->name('index');
+            Route::post('/', [StaffController::class, 'store'])->name('store');
+            Route::get('/{staff}', [StaffController::class, 'show'])->name('show');
+            Route::patch('/{staff}', [StaffController::class, 'update'])->name('update');
+            Route::delete('/{staff}', [StaffController::class, 'destroy'])->name('destroy');
+        });
+
+        /*
+        ************ Staff  Ends Here *******************
         */
     });
 

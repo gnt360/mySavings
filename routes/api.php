@@ -3,17 +3,17 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Settings\SettingController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\Subscribers\StaffController;
 use App\Http\Controllers\Auth\CreateAccountController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Settings\SettingController;
-use App\Http\Controllers\Subscribers\StaffController;
-use App\Http\Controllers\Subscribers\SubscriberAdminController;
 use App\Http\Controllers\User\ChangePasswordController;
-use App\Http\Controllers\Subscribers\SubscriberCategoryController;
 use App\Http\Controllers\Subscribers\SubscriberController;
+use App\Http\Controllers\Subscribers\SubscriberAccountController;
+use App\Http\Controllers\Subscribers\SubscriberCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +79,16 @@ Route::prefix('v1')->group(static function () {
             Route::post('/update-details', [SubscriberController::class, 'updateDetails'])->name('updateDetails');
         });
 
+        /*
+        ************ Subscriber Accounts Controllers starts here ******************
+        */
+        Route::prefix('subscriberAccounts')->name('subscriberAccounts.')->group(static function () {
+            Route::get('/', [SubscriberAccountController::class, 'index'])->name('index');
+            Route::post('/', [SubscriberAccountController::class, 'store'])->name('store');
+            Route::get('/{subscriberAccount}', [SubscriberAccountController::class, 'show'])->name('show');
+            Route::patch('/{subscriberAccount}', [SubscriberAccountController::class, 'update'])->name('update');
+            Route::delete('/{subscriberAccount}', [SubscriberAccountController::class, 'destroy'])->name('destroy');
+        });
 
         /*
         ************ System Settings starts here ******************

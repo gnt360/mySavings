@@ -110,4 +110,28 @@ class StaffController extends BaseController
     {
         return $staff->delete();
     }
+
+    public function activateStaff($staff)
+    {
+        $activateStaff = User::findOrFail($staff);
+        $activateStaff->status = true;
+        $activateStaff->save();
+
+        if (!$activateStaff) {
+            return $this->errorResponse('Unable to activate staff status', Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        return $this->successResponse('Staff Successfully activated', null);
+    }
+
+    public function deactivateStaff($staff)
+    {
+        $activateStaff = User::findOrFail($staff);
+        $activateStaff->status = false;
+        $activateStaff->save();
+
+        if (!$activateStaff) {
+            return $this->errorResponse('Unable to deactivate staff status', Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        return $this->successResponse('Staff Successfully deactivated', null);
+    }
 }

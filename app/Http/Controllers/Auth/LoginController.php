@@ -15,10 +15,9 @@ class LoginController extends BaseController
     public function login(LoginRequest $request)
     {
         $checkIfUserIsVerified = User::where('user_name', $request->user_name)
-        ->where('email_verified_at', '<>', NULL
-        )->first();
+            ->where('email_verified_at', '<>', NULL)->first();
 
-        if(!$checkIfUserIsVerified){
+        if (!$checkIfUserIsVerified) {
             return $this->errorResponse('Account not verified', Response::HTTP_BAD_REQUEST);
         }
 
@@ -27,6 +26,10 @@ class LoginController extends BaseController
             throw ValidationException::withMessages([
                 'user_name' => ['The provided credentials are incorrect.'],
             ]);
+        }
+
+        if ($user->status == false) {
+            return $this->errorResponse('Sorry you have been deactivated from this service', Response::HTTP_UNAUTHORIZED);
         }
 
         //return $user->createToken('ApiAuthentication')->plainTextToken;

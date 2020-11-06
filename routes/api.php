@@ -14,6 +14,7 @@ use App\Http\Controllers\User\ChangePasswordController;
 use App\Http\Controllers\Subscribers\SubscriberController;
 use App\Http\Controllers\Subscribers\SubscriberAccountController;
 use App\Http\Controllers\Subscribers\SubscriberCategoryController;
+use App\Http\Controllers\Subscribers\SubcriberTransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +89,15 @@ Route::prefix('v1')->group(static function () {
             Route::get('/{subscriberAccount}', [SubscriberAccountController::class, 'show'])->name('show');
             Route::patch('/{subscriberAccount}', [SubscriberAccountController::class, 'update'])->name('update');
             Route::delete('/{subscriberAccount}', [SubscriberAccountController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('subscriberTransactions')->name('subscriberTransaction.')->group(static function () {
+            Route::post('/deposit', [SubcriberTransactionController::class, 'deposit'])->name('deposit');
+            Route::post('/withdrawal', [SubcriberTransactionController::class, 'withdrawal'])->name('withdrawal');
+            Route::get('/', [SubcriberTransactionController::class, 'allTransactions'])->name('allTransactions');
+            Route::get('/dailyTrans', [SubcriberTransactionController::class, 'dailyTransactions'])->name('dailyTransactions');
+            Route::get('/weeklyTrans', [SubcriberTransactionController::class, 'weeklyTransactions'])->name('weeklyTransactions');
+            Route::get('/monthlyTrans', [SubcriberTransactionController::class, 'monthlyTransactions'])->name('monthlyTransactions');
         });
 
         /*

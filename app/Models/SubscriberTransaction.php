@@ -19,6 +19,6 @@ class SubscriberTransaction extends Model
 
     public function subscriberAccount()
     {
-        return $this->belongsTo(SubscriberAccount::class);
+        return $this->belongsTo(SubscriberAccount::class, 'account_id');
     }
 }

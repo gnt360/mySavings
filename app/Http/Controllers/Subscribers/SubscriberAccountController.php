@@ -19,7 +19,7 @@ class SubscriberAccountController extends BaseController
     public function index()
     {
         $subscriber = auth()->user()->subscriber_id;
-        $accountData = SubscriberAccount::where('subscriber_id', '=', $subscriber)->get();
+        $accountData = SubscriberAccount::where('subscriber_id', '=', $subscriber)->paginate(10);
         if (!$accountData) {
             return $this->errorResponse('Account Data not found', Response::HTTP_NOT_FOUND);
         }

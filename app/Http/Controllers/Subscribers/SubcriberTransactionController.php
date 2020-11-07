@@ -66,7 +66,7 @@ class SubcriberTransactionController extends BaseController
     public function allTransactions()
     {
         $subscriber = auth()->user()->subscriber_id;
-        $transactions = SubscriberTransaction::where('subscriber_id', '=', $subscriber)->latest()->orderBy('created_at', 'desc')->paginate(10);
+        $transactions = SubscriberTransaction::with('subscriberAccount:id,account_type,account_name')->where('subscriber_id', '=', $subscriber)->latest()->orderBy('created_at', 'desc')->paginate(10);
         if (!$transactions) {
             return $this->errorResponse('Unable to retrieve transactions', Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -77,7 +77,7 @@ class SubcriberTransactionController extends BaseController
     {
         $subscriber = auth()->user()->subscriber_id;
         $date   = Carbon::now()->today();
-        $dailyTrans = SubscriberTransaction::where('subscriber_id', '=', $subscriber)->whereDate('created_at',  $date)->latest('created_at', 'desc')->paginate(10);
+        $dailyTrans = SubscriberTransaction::with('subscriberAccount:id,account_type,account_name')->where('subscriber_id', '=', $subscriber)->whereDate('created_at',  $date)->latest('created_at', 'desc')->paginate(10);
 
         if (!$dailyTrans) {
             return $this->errorResponse('Unable to get daily records', Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -89,7 +89,7 @@ class SubcriberTransactionController extends BaseController
     {
         $subscriber = auth()->user()->subscriber_id;
         $date = [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()];
-        $weeklyTrans = SubscriberTransaction::where('subscriber_id', '=', $subscriber)->whereBetween('created_at',  $date)->latest('created_at', 'desc')->paginate(10);
+        $weeklyTrans = SubscriberTransaction::with('subscriberAccount:id,account_type,account_name')->where('subscriber_id', '=', $subscriber)->whereBetween('created_at',  $date)->latest('created_at', 'desc')->paginate(10);
 
         if (!$weeklyTrans) {
             return $this->errorResponse('Unable to get weekly records', Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -101,7 +101,7 @@ class SubcriberTransactionController extends BaseController
     {
         $subscriber = auth()->user()->subscriber_id;
         $date   = Carbon::now()->month;
-        $monthlyTrans = SubscriberTransaction::where('subscriber_id', '=', $subscriber)->whereMonth('created_at',  $date)->latest('created_at', 'desc')->paginate(10);
+        $monthlyTrans = SubscriberTransaction::with('subscriberAccount:id,account_type,account_name')->where('subscriber_id', '=', $subscriber)->whereMonth('created_at',  $date)->latest('created_at', 'desc')->paginate(10);
 
         if (!$monthlyTrans) {
             return $this->errorResponse('Unable to get monthly records', Response::HTTP_INTERNAL_SERVER_ERROR);

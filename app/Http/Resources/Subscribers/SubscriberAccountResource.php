@@ -21,7 +21,9 @@ class SubscriberAccountResource extends JsonResource
             'currentBalance' => $this->current_balance,
             'creditBalance' => $this->credit_balance,
             'debitBalance' => $this->debit_balance,
-            'DateCreated' => $this->created_at
+            'DateCreated' => $this->created_at,
+            'Transactions' => SubscriberTransResource::collection($this->subscriberTransactions)
+
         ];
     }
 }

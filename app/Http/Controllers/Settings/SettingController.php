@@ -23,7 +23,7 @@ class SettingController extends BaseController
         //
         $user = auth()->user()->subscriber_id;
         $subscriberSetting = SystemSetting::where('subscriber_id', '=', $user)->get();
-        if(!$subscriberSetting){
+        if (!$subscriberSetting) {
             return $this->errorResponse('Unable to display Settings', Response::HTTP_INTERNAL_SERVER_ERROR);
         }
         return $this->successResponse('Setting successfully displayed', SettingResource::collection($subscriberSetting));
@@ -38,18 +38,17 @@ class SettingController extends BaseController
     public function store(SettingRequest $request)
     {
 
-        $user = auth()->user()->subscriber_id;
-        $settings = new SystemSetting();
+        $subscriber = auth()->user()->subscriber_id;
+        $payload = $request->all();
 
-        $settings->subscriber_id = $user;
-        $settings->display_name = $request->display_name;
-        $settings->footer = $request->footer;
-        $settings->website_url = $request->website_url;
-        $settings->logo = $request->file('logo')->store('logos');
-        $settings->contact_number = $request->contact_number;
-        $settings->contact_email = $request->contact_email;
+        if ($request->hasFile('logo')) {
+            $payload['logo'] = time() + 1 . '.' . $request->logo->extension();
+            $request->logo->storeAs('logos', $payload['logo']);
+        }
+        $settings = new SystemSetting($payload);
+        $settings->subscriber_id = $subscriber;
 
-        if(!$settings->save()){
+        if (!$settings->save()) {
             return $this->errorResponse('unable to create system settings, try again', Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
@@ -66,7 +65,7 @@ class SettingController extends BaseController
     {
         $showSetting = new SettingResource($setting);
 
-        if(!$showSetting){
+        if (!$showSetting) {
             return $this->errorResponse('Unable to show settings', Response::HTTP_NOT_FOUND);
         }
         return $this->successResponse('Setting successfully retrieved',  $showSetting);
@@ -82,22 +81,23 @@ class SettingController extends BaseController
     public function update(Request $request, SystemSetting $setting)
     {
 
-        // delete the subscriber old log;
-       // $this->deleteLogo();
+        $logo = $request->logo;
+
+        if ($request->hasFile('logo')) {
+            // delete the subscriber old logo and update new one;
+            $this->deleteLogo($setting);
+            $logo['logo'] = time() + 1 . '.' . $request->logo->extension();
+            $request->logo->storeAs('logos', $logo['logo']);
+        }
         $updateSettings = $setting->update($request->all());
 
-        if(!$updateSettings){
+        if (!$updateSettings) {
             return $this->errorResponse('Unable to update changes', Response::HTTP_INTERNAL_SERVER_ERROR);
         }
         return $this->successResponse('Settings successfully updated', null);
     }
 
-    private function deleteLogo()
-    {
-        if (auth()->user()->logo) {
-            Storage::disk('public')->delete('logos/' . auth()->user()->logo);
-        }
-    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -107,7 +107,15 @@ class SettingController extends BaseController
      */
     public function destroy(SystemSetting $setting)
     {
+        //Remove logo from file if settings is deleted
+        $this->deleteLogo($setting);
+
         $setting->delete();
         return $this->successResponse('Successfully deleted');
+    }
+
+    private function deleteLogo($setting)
+    {
+        return Storage::disk('public')->delete('logos/' . $setting->logo);
     }
 }

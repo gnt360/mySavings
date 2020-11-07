@@ -10,6 +10,7 @@ use App\Http\Controllers\Subscribers\StaffController;
 use App\Http\Controllers\Auth\CreateAccountController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Subscribers\StaffDocUploadController;
 use App\Http\Controllers\User\ChangePasswordController;
 use App\Http\Controllers\Subscribers\SubscriberController;
 use App\Http\Controllers\Subscribers\SubscriberAccountController;
@@ -125,6 +126,22 @@ Route::prefix('v1')->group(static function () {
             Route::delete('/{staff}', [StaffController::class, 'destroy'])->name('destroy');
             Route::post('/activate-staff/{saff}', [StaffController::class, 'activateStaff'])->name('activateStaff');
             Route::post('/deactivate-staff/{saff}', [StaffController::class, 'deactivateStaff'])->name('deactivateStaff');
+        });
+
+        /*
+        ************ Staff  Ends Here *******************
+        */
+
+
+        /*
+        ************ Staff Routes starts here ******************
+        */
+        Route::prefix('staffDocuments')->name('staffDocument.')->group(static function () {
+            Route::get('/', [StaffDocUploadController::class, 'index'])->name('index');
+            Route::post('/', [StaffDocUploadController::class, 'store'])->name('store');
+            Route::get('/{staffDoc}', [StaffDocUploadController::class, 'show'])->name('show');
+            Route::patch('/{staffDoc}', [StaffDocUploadController::class, 'update'])->name('update');
+            Route::delete('/{staffDoc}', [StaffDocUploadController::class, 'destroy'])->name('destroy');
         });
 
         /*

@@ -10,6 +10,8 @@ class SubscriberStaffDocument extends Model
 {
     use HasFactory, UsesUuid;
 
+    protected $guarded = [];
+
     public function subscriber()
     {
         return $this->belongsTo(Subscriber::class);
